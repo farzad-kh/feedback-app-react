@@ -1,0 +1,14 @@
+.rating li:hover,
+.num-display {
+  background: #ff6a95;
+  color: #fff;
+}
+
+.card {
+    background-color: #fff;
+    color: #333;
+    border-radius: 15px;
+    padding: 45px 50px;
+    margin: 20px 0;
+    position: relative;
+  }
