@@ -5,7 +5,7 @@ export const FeedbackContext = createContext()
 export const ReverseContext = createContext()
 const FeedbackContextProvider = ({ children }) => {
 
-    const [feedback, setFeedback] = useState([])
+    const [feedback, setFeedback] = useState([{id:Date.now(),text:"this is feedback",rating:"5"}])
     const [isLoading, setIsloading] = useState(true)
     const getFeedbacks = async () => {
 
@@ -23,9 +23,17 @@ const FeedbackContextProvider = ({ children }) => {
     const [reverse, setReverse] = useState(false)
 
     // add fedback
-    const addFeedback = async (newFeedback) => {
+    // const addFeedback = async (newFeedback) => {
 
-        setFeedback([await postFeedbackData(newFeedback), ...feedback,])
+    //     setFeedback([await postFeedbackData(newFeedback), ...feedback,])
+
+
+
+
+    // }
+    const addFeedback = (newFeedback) => {
+
+        setFeedback([newFeedback, ...feedback,])
 
 
 
@@ -34,13 +42,23 @@ const FeedbackContextProvider = ({ children }) => {
 
     console.log(feedback);
     // delete feedback
-    const deletehand = async (id) => {
+    // const deletehand = async (id) => {
+
+    //     if (window.confirm("are you sure")) {
+           
+    //         const remove=feedback.filter(item => item.id !== id)
+    //        setFeedback(remove)
+    //        await deleteFeedbackData(id) 
+           
+    //     }
+    // }
+    const deletehand =(id) => {
 
         if (window.confirm("are you sure")) {
            
             const remove=feedback.filter(item => item.id !== id)
            setFeedback(remove)
-           await deleteFeedbackData(id) 
+        //    await deleteFeedbackData(id) 
            
         }
     }
@@ -48,10 +66,19 @@ const FeedbackContextProvider = ({ children }) => {
 
     //update feedback data
 
+    // const updateFeedback = async (id, updItem, rating) => {
+    //     console.log(updItem);
+    //     const putFeedback=await putFeedbackData(id,updItem)
+    //     setFeedback(feedback.map(item => item.id === id ? { ...item, ...putFeedback, rating } : item))
+      
+    //     // or
+    //     // setFeedback(feedback.map(item => item.id === id ? {...updItem } : {...item }))
+    // }
+
     const updateFeedback = async (id, updItem, rating) => {
-        console.log(updItem);
-        const putFeedback=await putFeedbackData(id,updItem)
-        setFeedback(feedback.map(item => item.id === id ? { ...item, ...putFeedback, rating } : item))
+     
+      
+        setFeedback(feedback.map(item => item.id === id ? { ...item, ...updItem, rating } : item))
       
         // or
         // setFeedback(feedback.map(item => item.id === id ? {...updItem } : {...item }))
